@@ -4,6 +4,8 @@
 
 use chrono::{offset, DateTime, Duration};
 use directories::UserDirs;
+use fs::File;
+use fs_err as fs;
 use futures::future::{self, Shared};
 use futures::{Async, Future, Stream};
 use hyper::client::HttpConnector;
@@ -16,7 +18,6 @@ use std::ascii::AsciiExt;
 use std::cell::RefCell;
 use std::collections::HashMap;
 use std::env::*;
-use std::fs::{self, File};
 use std::io::prelude::*;
 use std::io::BufReader;
 use std::path::{Path, PathBuf};

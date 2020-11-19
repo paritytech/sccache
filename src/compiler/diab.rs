@@ -23,10 +23,10 @@ use crate::dist;
 use crate::errors::*;
 use crate::mock_command::{CommandCreatorSync, RunCommand};
 use crate::util::{run_input_output, OsStrExt};
+use fs_err::File;
 use log::Level::Trace;
 use std::collections::HashMap;
 use std::ffi::OsString;
-use std::fs::File;
 use std::io::Read;
 use std::path::{Path, PathBuf};
 use std::process;
@@ -422,8 +422,8 @@ mod test {
     use crate::compiler::*;
     use crate::mock_command::*;
     use crate::test::utils::*;
+    use fs_err::File;
     use futures::Future;
-    use std::fs::File;
     use std::io::Write;
 
     fn parse_arguments_(arguments: Vec<String>) -> CompilerArguments<ParsedArguments> {

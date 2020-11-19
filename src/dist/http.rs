@@ -1279,6 +1279,9 @@ mod client {
                     let req = self.client.lock().unwrap().post(url);
 
                     Box::new(self.pool.spawn_fn(move || {
+                        use std::os::unix::io::{FromRawFd, IntoRawFd};
+                        let toolchain_file =
+                            unsafe { std::fs::File::from_raw_fd(toolchain_file.into_raw_fd()) };
                         let req = req.bearer_auth(job_alloc.auth.clone()).body(toolchain_file);
                         bincode_req(req)
                     }))
@@ -1469,7 +1472,7 @@ mod tests {
             let mut bufread = std::io::BufReader::new(data);
             let pem = picky::pem::Pem::read_from(&mut bufread).expect("PEM must be valid. Q.E.D.");
             println!("{} {}", tag, &pem);
-            let mut f = std::fs::OpenOptions::new()
+            let mut f = fs::OpenOptions::new()
                 .truncate(true)
                 .create(true)
                 .write(true)

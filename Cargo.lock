@@ -823,6 +823,12 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "00b0228411908ca8685dba7fc2cdd70ec9990a6e753e89b6ac91a84c40fbaf4b"
 
 [[package]]
+name = "fs-err"
+version = "2.5.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "bcd1163ae48bda72a20ae26d66a04d3094135cadab911cff418ae5e33f253431"
+
+[[package]]
 name = "fuchsia-cprng"
 version = "0.1.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1380,6 +1386,7 @@ name = "lru-disk-cache"
 version = "0.4.0"
 dependencies = [
  "filetime",
+ "fs-err",
  "linked-hash-map",
  "log 0.4.8",
  "tempfile",
@@ -2587,6 +2594,7 @@ dependencies = [
  "env_logger",
  "filetime",
  "flate2",
+ "fs-err",
  "futures 0.1.29",
  "futures 0.3.5",
  "hmac",

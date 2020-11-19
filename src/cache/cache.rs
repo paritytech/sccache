@@ -25,11 +25,11 @@ use crate::cache::redis::RedisCache;
 use crate::cache::s3::S3Cache;
 use crate::config::{self, CacheType, Config};
 use crate::util::SpawnExt;
+#[cfg(feature = "gcs")]
+use fs::File;
+use fs_err as fs;
 use futures_03::executor::ThreadPool;
 use std::fmt;
-use std::fs;
-#[cfg(feature = "gcs")]
-use std::fs::File;
 use std::io::{self, Cursor, Read, Seek, Write};
 use std::path::{Path, PathBuf};
 use std::sync::Arc;

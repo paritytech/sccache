@@ -1,8 +1,8 @@
 #![deny(rust_2018_idioms)]
 #![cfg(all(feature = "dist-client"))]
 
+use fs_err as fs;
 use selenium_rs::webdriver::{Browser, Selector, WebDriver};
-use std::fs;
 use std::io::{self, Read, Write};
 use std::net::TcpStream;
 use std::path::Path;

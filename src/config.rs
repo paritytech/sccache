@@ -13,6 +13,8 @@
 // limitations under the License.
 
 use directories::ProjectDirs;
+use fs::File;
+use fs_err as fs;
 use regex::Regex;
 use serde::de::{Deserialize, DeserializeOwned, Deserializer};
 #[cfg(any(feature = "dist-client", feature = "dist-server"))]
@@ -20,7 +22,6 @@ use serde::de::{Deserialize, DeserializeOwned, Deserializer};
 use serde::ser::{Serialize, Serializer};
 use std::collections::HashMap;
 use std::env;
-use std::fs::{self, File};
 use std::io::{Read, Write};
 use std::path::{Path, PathBuf};
 use std::result::Result as StdResult;

@@ -13,7 +13,7 @@
 // limitations under the License.
 
 use crate::dist;
-use std::fs;
+use fs_err as fs;
 use std::io;
 use std::path::{Component, Path, PathBuf};
 use std::str;
@@ -38,7 +38,7 @@ pub trait OutputsRepackager {
 #[cfg(not(all(target_os = "linux", target_arch = "x86_64")))]
 mod toolchain_imp {
     use super::ToolchainPackager;
-    use std::fs;
+    use fs_err as fs;
 
     use crate::errors::*;
 
@@ -54,8 +54,8 @@ mod toolchain_imp {
 #[cfg(all(target_os = "linux", target_arch = "x86_64"))]
 mod toolchain_imp {
     use super::tarify_path;
+    use fs_err as fs;
     use std::collections::BTreeMap;
-    use std::fs;
     use std::io::{Read, Write};
     use std::path::{Component, Path, PathBuf};
     use std::process;
@@ -162,6 +162,8 @@ mod toolchain_imp {
 
         pub fn into_compressed_tar<W: Write>(self, writer: W) -> Result<()> {
             use flate2::write::GzEncoder;
+            use std::os::unix::io::{FromRawFd, IntoRawFd};
+
             let ToolchainPackageBuilder { dir_set, file_set } = self;
 
             let mut builder =
@@ -170,8 +172,9 @@ mod toolchain_imp {
                 builder.append_dir(tar_path, dir_path)?
             }
             for (tar_path, file_path) in file_set.into_iter() {
-                let file = &mut fs::File::open(file_path)?;
-                builder.append_file(tar_path, file)?
+                let file = fs::File::open(file_path)?;
+                let mut file = unsafe { std::fs::File::from_raw_fd(file.into_raw_fd()) };
+                builder.append_file(tar_path, &mut file)?
             }
             builder.finish().map_err(Into::into)
         }
