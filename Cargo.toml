@@ -4,15 +4,15 @@ version = "0.2.14-alpha.0"
 authors = ["Ted Mielczarek <ted@mielczarek.org>", "Alex Crichton <alex@alexcrichton.com>"]
 license = "Apache-2.0"
 description = "Sccache is a ccache-like tool. It is used as a compiler wrapper and avoids compilation when possible, storing a cache in a remote storage using the S3 API."
-repository = "https://github.com/mozilla/sccache/"
+repository = "https://github.com/paritytech/sccache/"
 readme = "README.md"
 categories = ["command-line-utilities", "development-tools::build-utils"]
 keywords = ["ccache", "compile", "cache"]
 edition = "2018"
 
 [badges]
-travis-ci = { repository = "mozilla/sccache" }
-appveyor = { repository = "mozilla/sccache" }
+travis-ci = { repository = "paritytech/sccache" }
+appveyor = { repository = "paritytech/sccache" }
 
 [[bin]]
 name = "sccache"
